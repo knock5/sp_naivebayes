@@ -1,15 +1,18 @@
 const { PrismaClient } = require('@prisma/client');
 const express = require('express');
-const mehodOverride = require('method-override');
+const methodOverride = require('method-override');
 const path = require('path');
 
 const prisma = new PrismaClient();
 const app = express();
 app.use(express.json());
 
+// middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
+
 // set EJS template engine
 app.set('view engine', 'ejs');
-app.use(express.urlencoded({ extended: true }));
 app.set('views', path.join(__dirname, 'views'));
 
 // Middleware untuk hashing password
