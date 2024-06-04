@@ -1,53 +1,45 @@
 const { PrismaClient } = require('@prisma/client');
-const bcrypt = require('bcrypt');
+const express = require('express');
+const mehodOverride = require('method-override');
+const path = require('path');
 
 const prisma = new PrismaClient();
+const app = express();
+app.use(express.json());
 
-async function main() {
-  const hashSelvi = await bcrypt.hash('selvi123', 10);
-  const hashSilpi = await bcrypt.hash('silpi123', 10);
+// set EJS template engine
+app.set('view engine', 'ejs');
+app.use(express.urlencoded({ extended: true }));
+app.set('views', path.join(__dirname, 'views'));
 
-  // await prisma.role.createMany({
-  //   data: [
-  //     {
-  //       role_id: 1,
-  //       nama: 'admin',
-  //     },
-  //     {
-  //       role_id: 2,
-  //       nama: 'bendahara',
-  //     },
-  //   ],
-  // });
+// Middleware untuk hashing password
+prisma.$use(async (params, next) => {
+  if (params.model === 'User') {
+    if (params.action === 'create' || params.action === 'update') {
+      if (params.args.data.password) {
+        const hashedPassword = await bcrypt.hash(params.args.data.password, 10);
+        params.args.data.password = hashedPassword;
+      }
+    }
+  }
+  return next(params);
+});
 
-  await prisma.user.createMany({
-    data: [
-      {
-        nama: 'selvi',
-        email: 'selvi@gmail.com',
-        password: hashSelvi,
-        roleId: 1,
-      },
-      {
-        nama: 'silpi',
-        email: 'silpi@gmail.com',
-        password: hashSilpi,
-        roleId: 2,
-      },
-    ],
-  });
+app.get('/', (req, res) => {
+  res.render('index');
+});
 
-  const allUsers = await prisma.user.findMany();
+app.get('/users', async (req, res) => {
+  const users = await prisma.user.findMany();
+  res.json(users);
+});
 
-  console.dir(allUsers);
-}
+app.get('/roles', async (req, res) => {
+  const roles = await prisma.role.findMany();
+  res.json(roles);
+});
 
-main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-    process.exit(1);
-  });
+const port = process.env.SERVER_PORT;
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
+});
