@@ -7,16 +7,18 @@ async function main() {
   const hashSelvi = await bcrypt.hash('selvi123', 10);
   const hashSilpi = await bcrypt.hash('silpi123', 10);
 
-  await prisma.role.createMany({
-    data: [
-      {
-        nama: 'admin',
-      },
-      {
-        nama: 'bendahara',
-      },
-    ],
-  });
+  // await prisma.role.createMany({
+  //   data: [
+  //     {
+  //       role_id: 1,
+  //       nama: 'admin',
+  //     },
+  //     {
+  //       role_id: 2,
+  //       nama: 'bendahara',
+  //     },
+  //   ],
+  // });
 
   await prisma.user.createMany({
     data: [
@@ -24,21 +26,13 @@ async function main() {
         nama: 'selvi',
         email: 'selvi@gmail.com',
         password: hashSelvi,
-        role: {
-          connect: {
-            role_id: 1,
-          },
-        },
+        roleId: 1,
       },
       {
-        nama: 'selvi',
-        email: 'selvi@gmail.com',
+        nama: 'silpi',
+        email: 'silpi@gmail.com',
         password: hashSilpi,
-        role: {
-          connect: {
-            role_id: 2,
-          },
-        },
+        roleId: 2,
       },
     ],
   });
