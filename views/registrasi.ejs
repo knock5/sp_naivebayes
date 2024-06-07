@@ -2,8 +2,11 @@
 
 <div class="py-5 row align-items-center">
   <div class="col-md-12 d-flex justify-content-center py-5">
-    <form class="form" action="/login" method="POST">
-      <p class="form-title">Login</p>
+    <form class="form" action="/registrasi" method="POST">
+      <p class="form-title">Registrasi</p>
+      <div class="input-container">
+        <input placeholder="Masukkan nama" name="nama" type="text" required />
+      </div>
       <div class="input-container">
         <input
           placeholder="Masukkan email"
@@ -20,11 +23,11 @@
           required
         />
       </div>
-      <button class="submit" type="submit">MASUK</button>
+      <button class="submit" type="submit">Daftar</button>
 
       <p class="signup-link">
-        Belum punya akun?
-        <a href="/registrasi">Daftar</a>
+        Sudah punya akun?
+        <a href="/login">Login</a>
       </p>
     </form>
   </div>

@@ -6,6 +6,7 @@ const methodOverride = require('method-override');
 const ExpressError = require('./utils/ErrorHandler');
 const bcrypt = require('bcrypt');
 const path = require('path');
+const hashedPassword = require('./middlewares/hashPassword');
 const { ensureAuthenticated } = require('./middlewares/ensureAuthenticated');
 
 const prisma = new PrismaClient();
@@ -18,6 +19,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // middleware
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(
@@ -30,24 +32,10 @@ app.use(
 );
 
 // Middleware untuk hashing password
-prisma.$use(async (params, next) => {
-  if (params.model === 'User') {
-    if (params.action === 'create' || params.action === 'update') {
-      if (params.args.data.password) {
-        const hashedPassword = await bcrypt.hash(params.args.data.password, 10);
-        params.args.data.password = hashedPassword;
-      }
-    }
-  }
-  return next(params);
-});
+prisma.$use(hashedPassword);
 
-app.get('/', ensureAuthenticated, async (req, res) => {
-  const user = await prisma.user.findUnique({
-    where: { user_id: req.session.userId },
-    include: { role: true },
-  });
-  res.render('home', { user });
+app.get('/', (req, res) => {
+  res.render('login');
 });
 
 app.get('/login', (req, res) => {
@@ -65,6 +53,34 @@ app.post('/login', async (req, res) => {
   } else {
     res.redirect('/login');
   }
+});
+
+app.get('/registrasi', (req, res) => {
+  res.render('registrasi');
+});
+
+app.post('/registrasi', async (req, res) => {
+  const { nama, email, password } = req.body;
+
+  // cek email
+  const existingUser = await prisma.user.findUnique({ where: { email } });
+  if (existingUser) {
+    return res.status(400).send('Email sudah terdaftar');
+  }
+
+  // create user
+  const newUser = await prisma.user.create({
+    data: {
+      nama,
+      email,
+      password,
+      roleId: 2,
+    },
+  });
+
+  console.log(newUser);
+
+  res.redirect('/login');
 });
 
 app.get('/dashboard', ensureAuthenticated, async (req, res) => {
