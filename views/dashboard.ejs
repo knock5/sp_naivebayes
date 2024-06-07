@@ -1,5 +1,8 @@
 <% layout('layout/app') %>
 
-<h1>Welcome to the Dashboard, <%= user.nama %>!</h1>
-<p>Your role is: <%= user.role.nama %></p>
-<a href="/logout">Logout</a>
+<div class="p-5 container">
+  <h1>Welcome to the Dashboard, <%= user.nama %>!</h1>
+  <p>Your role is: <%= user.role.nama %></p>
+
+  <a href="/logout">Logout</a>
+</div>
