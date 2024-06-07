@@ -1,4 +1,5 @@
 const { PrismaClient } = require('@prisma/client');
+const ejsMate = require('ejs-mate');
 const express = require('express');
 const session = require('express-session');
 const methodOverride = require('method-override');
@@ -12,6 +13,7 @@ const app = express();
 app.use(express.json());
 
 // set EJS template engine
+app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
