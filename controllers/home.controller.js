@@ -3,10 +3,6 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 const homeController = {
-  home(req, res) {
-    res.render('login');
-  },
-
   async dashView(req, res) {
     const user = await prisma.user.findUnique({
       where: { user_id: req.session.userId },
@@ -17,8 +13,15 @@ const homeController = {
   },
 
   async getUsers(req, res) {
-    const users = await prisma.user.findMany();
-    res.json(users);
+    try {
+      const users = await prisma.user.findMany({
+        include: { role: true },
+      });
+      res.render('admin/users', { users });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
   },
 
   async getRoles(req, res) {
