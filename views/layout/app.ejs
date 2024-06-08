@@ -17,9 +17,11 @@
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body class="d-flex flex-column vh-100">
-    <%- include('partials/navbar.ejs') %>
+    <div class="d-flex vh-100">
+      <%- include('partials/navbar.ejs') %>
 
-    <main><%- body %></main>
+      <main><%- body %></main>
+    </div>
 
     <%- include('partials/footer') %>
 
