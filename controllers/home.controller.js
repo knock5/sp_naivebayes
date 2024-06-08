@@ -9,7 +9,7 @@ const homeController = {
       include: { role: true },
     });
 
-    res.render('dashboard', { user });
+    res.render('dashboard', { user, currentPage: 'dashboard' });
   },
 
   async getUsers(req, res) {
@@ -17,7 +17,7 @@ const homeController = {
       const users = await prisma.user.findMany({
         include: { role: true },
       });
-      res.render('admin/users', { users });
+      res.render('admin/users', { users, currentPage: 'users' });
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');

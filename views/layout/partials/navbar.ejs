@@ -1,11 +1,19 @@
 <div class="d-flex flex-column px-5 py-2 bg-dark text-white">
-  <div class="py-2">
-    <h3>Dashboard</h3>
+  <div class="py-2 text-center">
+    <h2>Dashboard</h2>
   </div>
-  <div class="py-2">
-    <a href="/dashboard">Home</a>
+  <div class="py-2 text-center">
+    <a
+      href="/dashboard"
+      class="nav-link nav-dash <%= currentPage === 'dashboard' ? 'active' : '' %>"
+      >Home</a
+    >
   </div>
-  <div class="py-2">
-    <a href="/users">Users</a>
+  <div class="py-2 text-center">
+    <a
+      href="/users"
+      class="nav-link nav-dash <%= currentPage === 'users' ? 'active' : '' %>"
+      >Users</a
+    >
   </div>
 </div>
