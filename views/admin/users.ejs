@@ -1,32 +1,78 @@
 <% layout('layout/app') %>
 
-<div class="mt-5 p-3">
-  <h2 class="text-center border-bottom pb-3">Data Pengguna</h2>
-  <div class="text-center mb-3">
-    <button class="btn">
-      <a href="/" class="btn btn-success">Tambah User</a>
-    </button>
+<div class="container">
+  <div class="text-end">
+    <a href="/logout" class="btn btn-outline-danger">Logout</a>
   </div>
-  <div class="table-responsive">
-    <table class="table text-center table-striped table-bordered">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Nama</th>
-          <th scope="col">Email</th>
-          <th scope="col">Role</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% users.forEach((user, index) => { %>
-        <tr>
-          <th scope="row"><%= index + 1 %></th>
-          <td><%= user.nama %></td>
-          <td><%= user.email %></td>
-          <td><%= user.role.nama %></td>
-        </tr>
-        <% }) %>
-      </tbody>
-    </table>
+  <div class="p-3">
+    <% if (success === '1') { %>
+    <div
+      class="alert my-2 text-center alert-success alert-dismissible fade show"
+      role="alert"
+    >
+      Berhasil menambahkan user
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+    <% } else if (success === '2') { %>
+    <div
+      class="alert my-2 text-center alert-success alert-dismissible fade show"
+      role="alert"
+    >
+      Berhasil menghapus user
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+    <% } %>
+    <h2 class="text-center border-bottom pb-3">Data Pengguna</h2>
+    <div class="text-center mb-3">
+      <button class="btn">
+        <a href="/create-user" class="btn btn-success">Tambah User</a>
+      </button>
+    </div>
+    <div class="table-responsive">
+      <table class="table text-center table-striped table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Email</th>
+            <th scope="col">Role</th>
+            <th scope="col">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.forEach((user, index) => { %>
+          <tr>
+            <th scope="row"><%= index + 1 %></th>
+            <td><%= user.nama %></td>
+            <td><%= user.email %></td>
+            <td><%= user.role.nama %></td>
+            <td>
+              <% if (user.role.nama !== 'admin') { %>
+              <form
+                action="/users/delete/<%= user.user_id %>"
+                method="POST"
+                style="display: inline"
+              >
+                <button type="submit" class="btn btn-sm btn-danger">
+                  Hapus
+                </button>
+              </form>
+              <% } %>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

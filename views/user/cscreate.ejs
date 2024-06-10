@@ -1,0 +1,97 @@
+<% layout('layout/app') %>
+<div class="container">
+  <div class="row mb-2">
+    <div class="col">
+      <a href="/csview" class="btn btn-warning">Kembali</a>
+    </div>
+    <div class="col text-end">
+      <h3>Tambah Nasabah Baru</h3>
+    </div>
+  </div>
+
+  <div class="card p-3 mt-3">
+    <form action="/cscreate" method="POST">
+      <div class="row mb-3">
+        <label for="nama" class="col-sm-2 col-form-label">Nama</label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            name="nama"
+            placeholder="Masukkan nama"
+            required
+          />
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="umur" class="col-sm-2 col-form-label">Umur</label>
+        <div class="col-sm-10">
+          <input
+            type="number"
+            min="1"
+            class="form-control"
+            name="umur"
+            placeholder="Masukkan umur"
+            required
+          />
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="status_pernikahan" class="col-sm-2 col-form-label"
+          >Status Pernikahan</label
+        >
+        <div class="col-sm-10">
+          <select name="status_pernikahan" class="form-select" required>
+            <option value="" selected hidden>Pilih Status Pernikahan</option>
+            <option value="lajang">Lajang</option>
+            <option value="menikah">Menikah</option>
+            <option value="cerai">Cerai</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="pekerjaan" class="col-sm-2 col-form-label">Pekerjaan</label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            name="pekerjaan"
+            placeholder="Masukkan pekerjaan"
+            required
+          />
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="penghasilan" class="col-sm-2 col-form-label"
+          >Penghasilan (Rp)</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            name="penghasilan"
+            placeholder="Masukkan penghasilan perbulan (Rp)"
+            required
+          />
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="tempat_tinggal" class="col-sm-2 col-form-label"
+          >Tempat Tinggal</label
+        >
+        <div class="col-sm-10">
+          <select name="tempat_tinggal" class="form-select" required>
+            <option value="" selected hidden>Pilih Tempat Tinggal</option>
+            <option value="sendiri">Sendiri</option>
+            <option value="kontrak">Kontrak</option>
+            <option value="kos">Kos</option>
+            <option value="ortu">Ortu</option>
+          </select>
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -25,10 +25,6 @@ const AuthController = {
     }
   },
 
-  regisView(req, res) {
-    res.render('registrasi');
-  },
-
   async register(req, res) {
     const { nama, email, password } = req.body;
 
@@ -48,7 +44,7 @@ const AuthController = {
       },
     });
 
-    res.redirect('/login');
+    res.redirect('/users?success=1');
   },
 
   logout(req, res) {

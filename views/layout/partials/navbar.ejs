@@ -11,9 +11,33 @@
   </div>
   <div class="py-2 text-center">
     <a
+      href="/csview"
+      class="nav-link nav-dash <%= currentPage === 'csview' ? 'active' : '' %>"
+      >Nasabah</a
+    >
+  </div>
+  <div class="py-2 text-center">
+    <a
+      href="/custs"
+      class="nav-link nav-dash <%= currentPage === 'custs' ? 'active' : '' %>"
+      >Data Hasil</a
+    >
+  </div>
+  <% if (user.role.nama === 'bendahara') { %>
+  <div class="py-2 text-center border-top">
+    <a
+      href="/prediksi"
+      class="nav-link nav-dash <%= currentPage === 'prediksi' ? 'active' : '' %>"
+      >Prediksi</a
+    >
+  </div>
+  <% } %> <% if (user.role.nama === 'admin') { %>
+  <div class="py-2 text-center border-top">
+    <a
       href="/users"
       class="nav-link nav-dash <%= currentPage === 'users' ? 'active' : '' %>"
       >Users</a
     >
   </div>
+  <% } %>
 </div>

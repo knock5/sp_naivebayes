@@ -1,0 +1,96 @@
+<% layout('layout/app') %>
+<div class="container">
+  <div class="text-end">
+    <a href="/logout" class="btn btn-outline-danger">Logout</a>
+  </div>
+
+  <div class="mb-3">
+    <h2 class="text-center border-bottom pb-2">Data Nasabah</h2>
+  </div>
+
+  <% if (success === '1') { %>
+  <div
+    class="alert my-2 text-center alert-success alert-dismissible fade show"
+    role="alert"
+  >
+    Berhasil menambahkan atau mengupdate Nasabah
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  <% } else if (success === '2') { %>
+  <div
+    class="alert my-2 text-center alert-success alert-dismissible fade show"
+    role="alert"
+  >
+    Berhasil menghapus Nasabah
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  <% } %> <% if (user.role.nama === 'bendahara') { %>
+  <div class="py-2 mb-2 text-center">
+    <a href="/create-cust" class="btn btn-success">Tambah Nasabah</a>
+  </div>
+  <% } %>
+  <div class="table-responsive">
+    <table class="table text-center table-striped table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nama</th>
+          <th scope="col">Umur</th>
+          <th scope="col">Status Pernikahan</th>
+          <th scope="col">Pekerjaan</th>
+          <th scope="col">Penghasilan</th>
+          <th scope="col">Tempat Tinggal</th>
+          <% if (user.role.nama === 'bendahara') { %>
+          <th scope="col">Aksi</th>
+          <% } %>
+        </tr>
+      </thead>
+      <tbody>
+        <% function formatRupiah(angka) { var number_string =
+        angka.toString().replace(/[^,\d]/g, ''), split =
+        number_string.split(','), sisa = split[0].length % 3, rupiah =
+        split[0].substr(0, sisa), ribuan =
+        split[0].substr(sisa).match(/\d{3}/gi); if (ribuan) { separator = sisa ?
+        '.' : ''; rupiah += separator + ribuan.join('.'); } rupiah = split[1]
+        !== undefined ? rupiah + ',' + split[1] : rupiah; return 'Rp. ' +
+        rupiah; } %> <% custs.forEach((cust, index) => { %>
+        <tr>
+          <th scope="row"><%= index + 1 %></th>
+          <td><%= cust.nama %></td>
+          <td><%= cust.umur %></td>
+          <td><%= cust.status_pernikahan %></td>
+          <td><%= cust.pekerjaan %></td>
+          <td><%= formatRupiah(cust.penghasilan) %></td>
+          <td><%= cust.tempat_tinggal %></td>
+          <% if (user.role.nama === 'bendahara') { %>
+          <td>
+            <a
+              href="/cust/edit/<%= cust.cust_id %>"
+              class="btn btn-sm btn-warning"
+              >Edit</a
+            >
+            <form
+              action="/cust/delete/<%= cust.cust_id %>"
+              method="POST"
+              style="display: inline"
+            >
+              <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+            </form>
+          </td>
+          <% } %>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>

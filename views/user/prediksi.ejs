@@ -1,0 +1,123 @@
+<% layout('layout/app') %>
+<div class="container">
+  <div class="text-end">
+    <a href="/logout" class="btn btn-outline-danger">Logout</a>
+  </div>
+
+  <div class="mb-3">
+    <h2 class="text-center border-bottom pb-2">Prediksi Kelayakan</h2>
+  </div>
+
+  <div class="card p-3 mt-3">
+    <form id="prediksiForm">
+      <div class="row mb-3">
+        <label for="umur" class="col-sm-2 col-form-label">Umur</label>
+        <div class="col-sm-10">
+          <input
+            type="number"
+            min="1"
+            class="form-control"
+            name="umur"
+            id="umur"
+            placeholder="Masukkan umur"
+            required
+          />
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="status_pernikahan" class="col-sm-2 col-form-label"
+          >Status Pernikahan</label
+        >
+        <div class="col-sm-10">
+          <select
+            name="status_pernikahan"
+            id="statusPernikahan"
+            class="form-select"
+            required
+          >
+            <option value="" selected hidden>Pilih Status Pernikahan</option>
+            <option value="lajang">Lajang</option>
+            <option value="menikah">Menikah</option>
+            <option value="cerai">Cerai</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="penghasilan" class="col-sm-2 col-form-label"
+          >Penghasilan (Rp)</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            name="penghasilan"
+            id="penghasilan"
+            placeholder="Masukkan penghasilan perbulan (Rp)"
+            required
+          />
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="tempat_tinggal" class="col-sm-2 col-form-label"
+          >Tempat Tinggal</label
+        >
+        <div class="col-sm-10">
+          <select
+            name="tempat_tinggal"
+            id="tempatTinggal"
+            class="form-select"
+            required
+          >
+            <option value="" selected hidden>Pilih Tempat Tinggal</option>
+            <option value="sendiri">Sendiri</option>
+            <option value="kontrak">Kontrak</option>
+            <option value="kos">Kos</option>
+            <option value="ortu">Ortu</option>
+          </select>
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="resultModal"
+  tabindex="-1"
+  aria-labelledby="resultModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="resultModalLabel">Data Nasabah</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Umur:</strong> <span id="modalUmur"></span></p>
+        <p>
+          <strong>Status Pernikahan:</strong>
+          <span id="modalStatusPernikahan"></span>
+        </p>
+        <p><strong>Penghasilan:</strong> <span id="modalPenghasilan"></span></p>
+        <p>
+          <strong>Tempat Tinggal:</strong> <span id="modalTempatTinggal"></span>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
