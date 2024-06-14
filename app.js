@@ -4,6 +4,7 @@ const express = require('express');
 const session = require('express-session');
 const methodOverride = require('method-override');
 const ExpressError = require('./utils/ErrorHandler');
+const bcrypt = require('bcrypt');
 const path = require('path');
 const hashedPassword = require('./middlewares/hashPassword');
 const router = require('./routes');
@@ -52,3 +53,37 @@ const port = process.env.SERVER_PORT || 3030;
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+async function seed() {
+  try {
+    // Create roles if they don't exist
+    await prisma.role.createMany({
+      data: [
+        { role_id: 1, nama: 'admin' },
+        { role_id: 2, nama: 'bendahara' },
+      ],
+      skipDuplicates: true, // Skip creating if they already exist
+    });
+
+    // Create users if they don't exist
+    await prisma.user.createMany({
+      data: [
+        {
+          nama: 'Selvi',
+          email: 'selvi@gmail.com',
+          password: await bcrypt.hash('selvi123', 10),
+          roleId: 1,
+        },
+        {
+          nama: 'Silvi',
+          email: 'silvi@gmail.com',
+          password: await bcrypt.hash('silvi123', 10),
+          roleId: 2,
+        },
+      ],
+      skipDuplicates: true,
+    });
+  } catch (e) {
+    console.error('Error seeding the database:', e);
+  }
+}

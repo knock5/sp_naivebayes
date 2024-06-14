@@ -27,8 +27,9 @@ CREATE TABLE `Cust` (
     `nama` VARCHAR(191) NOT NULL,
     `umur` INTEGER NOT NULL,
     `status_pernikahan` VARCHAR(191) NOT NULL,
-    `pekerjaan` VARCHAR(191) NOT NULL,
+    `pekerjaan` ENUM('PNS', 'wiraswasta', 'pengangguran', 'freelancer', 'pelajar', 'karyawan') NOT NULL,
     `penghasilan` VARCHAR(191) NOT NULL,
+    `jaminan` ENUM('KTP', 'BPKB') NOT NULL,
     `tempat_tinggal` ENUM('sendiri', 'kontrak', 'kos', 'ortu') NOT NULL,
     `hasil` VARCHAR(191) NULL,
 
