@@ -50,6 +50,7 @@
           <th scope="col">Pekerjaan</th>
           <th scope="col">Penghasilan</th>
           <th scope="col">Tempat Tinggal</th>
+          <th scope="col">Jaminan</th>
           <% if (user.role.nama === 'bendahara') { %>
           <th scope="col">Aksi</th>
           <% } %>
@@ -72,6 +73,7 @@
           <td><%= cust.pekerjaan %></td>
           <td><%= formatRupiah(cust.penghasilan) %></td>
           <td><%= cust.tempat_tinggal %></td>
+          <td><%= cust.jaminan %></td>
           <% if (user.role.nama === 'bendahara') { %>
           <td>
             <a

@@ -47,6 +47,7 @@ const homeController = {
         status_pernikahan,
         pekerjaan,
         penghasilan,
+        jaminan,
         tempat_tinggal,
         hasil,
       } = req.body;
@@ -57,6 +58,7 @@ const homeController = {
         !umur ||
         !status_pernikahan ||
         !pekerjaan ||
+        !jaminan ||
         !penghasilan ||
         !tempat_tinggal
       ) {
@@ -71,6 +73,7 @@ const homeController = {
           status_pernikahan,
           pekerjaan,
           penghasilan,
+          jaminan,
           tempat_tinggal,
           hasil: hasil || null,
         },
@@ -86,15 +89,21 @@ const homeController = {
   async editCustView(req, res) {
     try {
       const { id } = req.params;
+
       const cust = await prisma.cust.findUnique({
         where: { cust_id: parseInt(id) },
+      });
+
+      const user = await prisma.user.findUnique({
+        where: { user_id: req.session.userId },
+        include: { role: true },
       });
 
       if (!cust) {
         return res.status(404).send('Nasabah tidak ditemukan');
       }
 
-      res.render('user/csedit', { cust, currentPage: 'csview' });
+      res.render('user/csedit', { cust, user, currentPage: 'csview' });
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');

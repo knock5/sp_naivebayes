@@ -52,13 +52,15 @@
       <div class="row mb-3">
         <label for="pekerjaan" class="col-sm-2 col-form-label">Pekerjaan</label>
         <div class="col-sm-10">
-          <input
-            type="text"
-            class="form-control"
-            name="pekerjaan"
-            placeholder="Masukkan pekerjaan"
-            required
-          />
+          <select name="pekerjaan" class="form-select" required>
+            <option value="" selected hidden>Pilih Pekerjaan</option>
+            <option value="PNS">PNS</option>
+            <option value="wiraswasta">Wiraswasta</option>
+            <option value="pengangguran">Pengangguran</option>
+            <option value="freelancer">Freelancer</option>
+            <option value="pelajar">Pelajar</option>
+            <option value="karyawan">Karyawan</option>
+          </select>
         </div>
       </div>
       <div class="row mb-3">
@@ -86,6 +88,16 @@
             <option value="kontrak">Kontrak</option>
             <option value="kos">Kos</option>
             <option value="ortu">Ortu</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="jaminan" class="col-sm-2 col-form-label">Jaminan</label>
+        <div class="col-sm-10">
+          <select name="jaminan" class="form-select" required>
+            <option value="" selected hidden>Pilih Jaminan</option>
+            <option value="KTP">KTP</option>
+            <option value="BPKB">BPKB</option>
           </select>
         </div>
       </div>

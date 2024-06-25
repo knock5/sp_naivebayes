@@ -24,6 +24,17 @@ model User {
   updated_at  DateTime  @updatedAt
 }
 
+model Dataset {
+  dataset_id            Int     @id @default(autoincrement())
+  umur                  Int
+  status_pernikahan     Status
+  pekerjaan             Pekerjaan
+  penghasilan           String
+  tempat_tinggal        TempatTinggal
+  jaminan               Jaminan
+  hasil                 String
+}
+
 model Role {
   role_id     Int     @id @default(autoincrement())
   nama        String  @unique
@@ -34,12 +45,17 @@ model Cust {
   cust_id             Int       @id @default(autoincrement())
   nama                String
   umur                Int
-  status_pernikahan   String
+  status_pernikahan   Status
   pekerjaan           Pekerjaan
   penghasilan         String
   jaminan             Jaminan
   tempat_tinggal      TempatTinggal
   hasil               String?
+}
+
+enum Status {
+  lajang
+  menikah
 }
 
 enum Jaminan {
@@ -49,9 +65,8 @@ enum Jaminan {
 
 enum Pekerjaan {
   PNS
-  wiraswasta
+  petani
   pengangguran
-  freelancer
   pelajar
   karyawan
 }
@@ -59,6 +74,4 @@ enum Pekerjaan {
 enum TempatTinggal {
   sendiri
   kontrak
-  kos
-  ortu
 }

@@ -34,12 +34,15 @@ const AuthController = {
       return res.status(400).send('Email sudah terdaftar');
     }
 
+    // hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     // Create user
     await prisma.user.create({
       data: {
         nama,
         email,
-        password,
+        password: hashedPassword,
         roleId: 2,
       },
     });
