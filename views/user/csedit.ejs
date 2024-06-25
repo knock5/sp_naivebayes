@@ -47,7 +47,6 @@
             <option value="" hidden>Pilih Status Pernikahan</option>
             <option value="lajang" <%= cust.status_pernikahan === 'lajang' ? 'selected' : '' %>>Lajang</option>
             <option value="menikah" <%= cust.status_pernikahan === 'menikah' ? 'selected' : '' %>>Menikah</option>
-            <option value="cerai" <%= cust.status_pernikahan === 'cerai' ? 'selected' : '' %>>Cerai</option>
           </select>
         </div>
       </div>
@@ -58,22 +57,22 @@
         <div class="col-sm-10">
           <select name="jaminan" class="form-select" required>
             <option value="" hidden>Pilih Jaminan</option>
-            <option value="KTP" <%= cust.jaminan === 'lajang' ? 'selected' : '' %>>KTP</option>
-            <option value="BPKB" <%= cust.jaminan === 'menikah' ? 'selected' : '' %>>BPKB</option>
+            <option value="KTP" <%= cust.jaminan === 'KTP' ? 'selected' : '' %>>KTP</option>
+            <option value="BPKB" <%= cust.jaminan === 'BPKB' ? 'selected' : '' %>>BPKB</option>
           </select>
         </div>
       </div>
       <div class="row mb-3">
         <label for="pekerjaan" class="col-sm-2 col-form-label">Pekerjaan</label>
         <div class="col-sm-10">
-          <input
-            type="text"
-            class="form-control"
-            name="pekerjaan"
-            value="<%= cust.pekerjaan %>"
-            placeholder="Masukkan pekerjaan"
-            required
-          />
+          <select name="pekerjaan" class="form-select" required>
+            <option value="" hidden>Pilih Pekerjaan</option>
+            <option value="PNS" <%= cust.pekerjaan === 'PNS' ? 'selected' : '' %>>PNS</option>
+            <option value="petani" <%= cust.pekerjaan === 'petani' ? 'selected' : '' %>>Petani</option>
+            <option value="pengangguran" <%= cust.pekerjaan === 'pengangguran' ? 'selected' : '' %>>pengangguran</option>
+            <option value="pelajar" <%= cust.pekerjaan === 'pelajar' ? 'selected' : '' %>>Pelajar</option>
+            <option value="karyawan" <%= cust.pekerjaan === 'karyawan' ? 'selected' : '' %>>Karyawan</option>
+          </select>
         </div>
       </div>
       <div class="row mb-3">
@@ -100,8 +99,6 @@
             <option value="" hidden>Pilih Tempat Tinggal</option>
             <option value="sendiri" <%= cust.tempat_tinggal === 'sendiri' ? 'selected' : '' %>>Sendiri</option>
             <option value="kontrak" <%= cust.tempat_tinggal === 'kontrak' ? 'selected' : '' %>>Kontrak</option>
-            <option value="kos" <%= cust.tempat_tinggal === 'kos' ? 'selected' : '' %>>Kos</option>
-            <option value="ortu" <%= cust.tempat_tinggal === 'ortu' ? 'selected' : '' %>>Ortu</option>
           </select>
         </div>
       </div>

@@ -52,7 +52,6 @@ const port = process.env.SERVER_PORT || 3030;
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
-  seed();
 });
 
 // data seeder
