@@ -66,7 +66,8 @@ const homeController = {
         return res.status(400).send('All fields are required');
       }
 
-      await prisma.cust.create({
+      // Buat data nasabah baru
+      const dataCreate = await prisma.cust.create({
         data: {
           nama,
           umur: parseInt(umur, 10),
@@ -75,9 +76,11 @@ const homeController = {
           penghasilan,
           jaminan,
           tempat_tinggal,
-          hasil: hasil || null,
+          hasil,
         },
       });
+
+      console.log(dataCreate);
 
       res.redirect('/csview?success=1');
     } catch (error) {

@@ -76,12 +76,19 @@ a {
   border-radius: 0.5rem;
   text-transform: uppercase;
 }
-.signup-link {
-  color: #6b7280;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  text-align: center;
-}
-.signup-link a {
-  text-decoration: underline;
+
+body {
+  background-image: radial-gradient(
+    circle at top right,
+    rgb(201, 191, 255) 0%,
+    rgb(201, 191, 255) 48%,
+    rgb(194, 149, 255) 48%,
+    rgb(194, 149, 255) 53%,
+    rgb(160, 56, 225) 53%,
+    rgb(160, 56, 225) 56%,
+    rgb(106, 35, 143) 56%,
+    rgb(106, 35, 143) 69%,
+    rgb(82, 9, 102) 69%,
+    rgb(82, 9, 102) 100%
+  );
 }
