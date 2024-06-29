@@ -224,7 +224,16 @@ const homeController = {
       include: { role: true },
     });
 
-    res.render('user/prediksi', { user, currentPage: 'prediksi' });
+    res.render('user/prediksi', {
+      user,
+      currentPage: 'prediksi',
+    });
+  },
+
+  async getAllDatasets(req, res) {
+    const response = await prisma.dataset.findMany();
+
+    res.json(response);
   },
 
   async getRoles(req, res) {

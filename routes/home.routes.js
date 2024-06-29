@@ -18,5 +18,6 @@ router.get('/cust/edit/:id', ensureAuthenticated, homeController.editCustView);
 router.post('/cust/edit/:id', ensureAuthenticated, homeController.updateCust);
 router.post('/cust/delete/:id', ensureAuthenticated, homeController.deleteCust);
 router.get('/prediksi', ensureAuthenticated, homeController.getPrediksiView);
+router.get('/api/dataset', ensureAuthenticated, homeController.getAllDatasets);
 
 module.exports = router;

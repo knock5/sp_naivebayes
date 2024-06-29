@@ -8,6 +8,7 @@
     <h2 class="text-center border-bottom pb-2">Prediksi Kelayakan</h2>
   </div>
 
+  <!-- Formulir Prediksi -->
   <div class="card p-3 mt-3">
     <form id="prediksiForm">
       <div class="row mb-3">
@@ -38,7 +39,6 @@
             <option value="" selected hidden>Pilih Status Pernikahan</option>
             <option value="lajang">Lajang</option>
             <option value="menikah">Menikah</option>
-            \
           </select>
         </div>
       </div>
@@ -58,10 +58,10 @@
           <select name="pekerjaan" id="pekerjaan" class="form-select" required>
             <option value="" selected hidden>Pilih Pekerjaan</option>
             <option value="PNS">PNS</option>
-            <option value="petani">petani</option>
-            <option value="pengangguran">pengangguran</option>
-            <option value="pelajar">pelajar</option>
-            <option value="karyawan">karyawan</option>
+            <option value="petani">Petani</option>
+            <option value="pengangguran">Pengangguran</option>
+            <option value="pelajar">Pelajar</option>
+            <option value="karyawan">Karyawan</option>
           </select>
         </div>
       </div>
@@ -98,13 +98,20 @@
         </div>
       </div>
       <div class="text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#resultModal"
+        >
+          Submit
+        </button>
       </div>
     </form>
   </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal Hasil Prediksi -->
 <div
   class="modal fade"
   id="resultModal"
@@ -115,7 +122,9 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="resultModalLabel">Data Nasabah</h5>
+        <h5 class="modal-title" id="resultModalLabel">
+          Hasil Prediksi Kelayakan
+        </h5>
         <button
           type="button"
           class="btn-close"
@@ -124,15 +133,40 @@
         ></button>
       </div>
       <div class="modal-body">
-        <p><strong>Umur:</strong> <span id="modalUmur"></span></p>
-        <p>
-          <strong>Status Pernikahan:</strong>
-          <span id="modalStatusPernikahan"></span>
-        </p>
-        <p><strong>Penghasilan:</strong> <span id="modalPenghasilan"></span></p>
-        <p>
-          <strong>Tempat Tinggal:</strong> <span id="modalTempatTinggal"></span>
-        </p>
+        <div class="my-3">
+          <table class="table table-bordered table-success">
+            <tbody>
+              <tr>
+                <th class="col-7">Umur</th>
+                <td class="col-5" id="modalUmur"></td>
+              </tr>
+              <tr>
+                <th class="col-7">Status Pernikahan</th>
+                <td class="col-5" id="modalStatusPernikahan"></td>
+              </tr>
+              <tr>
+                <th class="col-7">Pekerjaan</th>
+                <td class="col-5" id="modalPekerjaan"></td>
+              </tr>
+              <tr>
+                <th class="col-7">Penghasilan</th>
+                <td class="col-5" id="modalPenghasilan"></td>
+              </tr>
+              <tr>
+                <th class="col-7">Tempat Tinggal</th>
+                <td class="col-5" id="modalTempatTinggal"></td>
+              </tr>
+              <tr>
+                <th class="col-7">Jaminan</th>
+                <td class="col-5" id="modalJaminan"></td>
+              </tr>
+              <tr>
+                <th class="col-7">Hasil Kelayakan</th>
+                <td class="col-5" id="modalHasilKelayakan"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -142,3 +176,5 @@
     </div>
   </div>
 </div>
+
+<script src="/js/main.js"></script>
